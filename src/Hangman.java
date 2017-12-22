@@ -1,6 +1,6 @@
 public class Hangman {
 
-    public Hangman () {
+    public Hangman (String a) {
 
     }
 }

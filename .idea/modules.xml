@@ -3,6 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/hangmancsd.iml" filepath="$PROJECT_DIR$/.idea/modules/hangmancsd.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/hangmancsd_main.iml" filepath="$PROJECT_DIR$/.idea/modules/hangmancsd_main.iml" group="hangmancsd" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/hangmancsd_test.iml" filepath="$PROJECT_DIR$/.idea/modules/hangmancsd_test.iml" group="hangmancsd" />
     </modules>
   </component>
 </project>
