@@ -17,7 +17,9 @@ public class Hangman {
 
 
     public String getAnswer() {
+        if(status == Status.Won)
         return answer;
+        else return answer.replaceAll (".", "_");
     }
 
     public String getTried() {
@@ -29,9 +31,10 @@ public class Hangman {
     }
 
     public void guess(char a) {
+        if (tried.indexOf (a) < 0)
         tried += a;
 
-        if(answer.indexOf (a) >=0) {
+        if(answer.indexOf (a) >= 0) {
             status = Status.Won;
         }
         else{

@@ -8,7 +8,7 @@ public class HangmanTest {
     public void when_new_game_A() {
         Hangman game = new Hangman("A",3);
         assertEquals(Hangman.Status.Started, game.getStatus());
-        assertEquals ("A", game.getAnswer());
+        assertEquals ("_", game.getAnswer());
         assertEquals ("", game.getTried());
         assertEquals (3, game.getTries());
     }
@@ -37,5 +37,27 @@ public class HangmanTest {
         game.guess ('B');
         assertEquals (Hangman.Status.End, game.getStatus());
 
+    }
+    @Test
+    public void given_new_game_A_when_guess_B_B_then_end() {
+        Hangman game = new Hangman("A",3);
+        assertEquals(Hangman.Status.Started, game.getStatus());
+        game.guess('B');
+        assertEquals(Hangman.Status.Started, game.getStatus());
+        // assertEquals ("A", game.getAnswer ());
+        assertEquals ("B", game.getTried ());
+        assertEquals (2, game.getTries ());
+        game.guess('B');
+        assertEquals (1, game.getTries ());
+        game.guess ('B');
+        assertEquals ("B", game.getTried ());
+        assertEquals (Hangman.Status.End, game.getStatus());
+
+    }
+    @Test
+    public void given_new_game_ABC_when_guess__then_end() {
+        Hangman game = new Hangman("ABC",3);
+        assertEquals(Hangman.Status.Started, game.getStatus());
+        assertEquals ("___",game.getAnswer ());
     }
 }
