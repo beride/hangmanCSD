@@ -60,4 +60,82 @@ public class HangmanTest {
         assertEquals(Hangman.Status.Started, game.getStatus());
         assertEquals ("___",game.getAnswer ());
     }
+    @Test
+    public void given_new_game_ABC_when_guess_C_then_end() {
+        Hangman game = new Hangman("ABC",3);
+        assertEquals(Hangman.Status.Started, game.getStatus());
+        game.guess ('C');
+        assertEquals ("__C",game.getAnswer ());
+    }
+
+    @Test
+    public void given_new_game_ABC_when_guess_C_B_A_then_end() {
+        Hangman game = new Hangman("ABC",3);
+        assertEquals(Hangman.Status.Started, game.getStatus());
+        game.guess ('C');
+        game.guess ('B');
+        game.guess ('A');
+        assertEquals ("ABC",game.getAnswer ());
+        assertEquals(Hangman.Status.Won, game.getStatus());
+
+    }
+    @Test
+    public void given_new_game_ABC_when_guess_C_B_D_then_end() {
+        Hangman game = new Hangman("ABC",3);
+        assertEquals(Hangman.Status.Started, game.getStatus());
+        game.guess ('C');
+        game.guess ('B');
+        game.guess ('D');
+        game.guess ('O');
+        game.guess ('I');
+        assertEquals ("_BC",game.getAnswer ());
+        assertEquals(Hangman.Status.End, game.getStatus());
+    }
+
+    @Test
+    public void given_new_game_ABC_A_when_guess_C_B_D_then_Won() {
+        Hangman game = new Hangman("ABC",3);
+        game.setHint("A");
+        assertEquals ("A__",game.getAnswer ());
+        assertEquals(Hangman.Status.Started, game.getStatus());
+        game.guess ('C');
+        game.guess ('B');
+        assertEquals ("ABC",game.getAnswer ());
+        assertEquals(Hangman.Status.Won, game.getStatus());
+    }
+    @Test
+    public void given_new_game_ABCDEFG_AE_when_guess_C_B_D_F_G_then_Won() {
+        Hangman game = new Hangman("ABCDEFG",3);
+        game.setHint("AE");
+        assertEquals ("A___E__",game.getAnswer ());
+        assertEquals(Hangman.Status.Started, game.getStatus());
+        game.guess ('C');
+        game.guess ('B');
+        assertEquals ("ABC_E__",game.getAnswer ());
+        assertEquals(Hangman.Status.Started, game.getStatus());
+        game.guess ('D');
+        game.guess ('F');
+        game.guess ('G');
+        assertEquals ("ABCDEFG",game.getAnswer ());
+        assertEquals(Hangman.Status.Won, game.getStatus());
+    }
+
+    @Test
+    public void given_new_game_ABCDEFG_AE_when_guess_C_B_D_F_HQL_then_End() {
+        Hangman game = new Hangman("ABCDEFG",3);
+        game.setHint("AEIOU");
+        assertEquals ("A___E__",game.getAnswer ());
+        assertEquals(Hangman.Status.Started, game.getStatus());
+        game.guess ('C');
+        game.guess ('B');
+        assertEquals ("ABC_E__",game.getAnswer ());
+        assertEquals(Hangman.Status.Started, game.getStatus());
+        game.guess ('D');
+        game.guess ('F');
+        game.guess ('H');
+        game.guess ('Q');
+        game.guess ('L');
+        assertEquals ("ABCDEF_",game.getAnswer ());
+        assertEquals(Hangman.Status.End, game.getStatus());
+    }
 }

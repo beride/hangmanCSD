@@ -17,9 +17,10 @@ public class Hangman {
 
 
     public String getAnswer() {
-        if(status == Status.Won)
-        return answer;
-        else return answer.replaceAll (".", "_");
+        if ("".equals (tried))
+            return answer.replaceAll (".", "_");
+        else
+            return  answer.replaceAll("[^"+tried+"]","_");
     }
 
     public String getTried() {
@@ -34,14 +35,13 @@ public class Hangman {
         if (tried.indexOf (a) < 0)
         tried += a;
 
-        if(answer.indexOf (a) >= 0) {
-            status = Status.Won;
-        }
-        else{
+        if(answer.indexOf (a) < 0) {
             tries --;
-            if (tries <= 0)
-            status = Status.End;
         }
+    }
+
+    public void setHint(String a) {
+        tried = a;
     }
 
     public enum Status{
@@ -53,6 +53,17 @@ public class Hangman {
 
 
     public Status getStatus() {
-        return status;
+        if (answer.replaceAll (changeRE (), "_").equals (answer))
+            return Status.Won;
+        if (tries<=0)
+            return Status.End;
+        return Status.Started;
+    }
+
+    private String changeRE() {
+        if(!"".equals(tried)) {
+            return "[^"+tried+"]";
+        }
+        return ".";
     }
 }
