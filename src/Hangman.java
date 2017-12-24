@@ -7,13 +7,14 @@ public class Hangman {
     private String tried;
     private int tries;
 
-    public Hangman (String a) {
+    public Hangman (String a, int times) {
 
         answer = a;
-        tries = 0;
+        tries = times;
         tried = "";
         status = Status.Started;
     }
+
 
     public String getAnswer() {
         return answer;
@@ -29,11 +30,15 @@ public class Hangman {
 
     public void guess(char a) {
         tried += a;
-        tries++;
-        if(answer.equals (tried))
-        status = Status.Won;
-        else
+
+        if(answer.indexOf (a) >=0) {
+            status = Status.Won;
+        }
+        else{
+            tries --;
+            if (tries <= 0)
             status = Status.End;
+        }
     }
 
     public enum Status{
